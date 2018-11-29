@@ -8,8 +8,8 @@ import org.apache.flink.ml.RichExecutionEnvironment
 object svm {
   def main(args: Array[String]) {
     // set up the execution environment
-    val pathToTrainingFile: String = "iris-train.txt"
-    val pathToTestingFile: String = "iris-train.txt"
+    val pathToTrainingFile: String = "/home/aulae1-b6/map-reduce/fsp/src/main/resources/iris.csv"
+    val pathToTestingFile: String = "/home/aulae1-b6/map-reduce/fsp/src/main/resources/iris.csv"
     val env = ExecutionEnvironment.getExecutionEnvironment
 // Read the training dataset, from a LibSVM formatted file
 val trainingDS: DataSet[LabeledVector] =
@@ -25,7 +25,7 @@ val trainingDS: DataSet[LabeledVector] =
     // Calculate the predictions for the testing dataset
     val predictionDS: DataSet[(Vector, Double)] =
       svm.predict(testingDS)
-    predictionDS.writeAsText("out")
+    predictionDS.writeAsText("/home/aulae1-b6/map-reduce/fsp/src/main/resources/out.txt")
     env.execute("Flink SVM App")
   }
 }
